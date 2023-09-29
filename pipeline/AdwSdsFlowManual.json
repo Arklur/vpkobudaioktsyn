@@ -1,0 +1,163 @@
+{
+	"name": "AdwSdsFlowManual",
+	"properties": {
+		"activities": [
+			{
+				"name": "DictProductClass",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdmDictProductClass",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DictShipMethod",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdmDictShipMethod",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DictSizeUnit",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdmDictSizeUnit",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DictWeightUnit",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdmDictWeightUnit",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"EffectiveStartDate": {
+				"type": "string",
+				"defaultValue": "1900-01-01"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwSdsFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T13:51:29Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

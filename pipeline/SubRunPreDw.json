@@ -1,0 +1,109 @@
+{
+	"name": "SubRunPreDw",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecPrepMap",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": {
+						"value": "@concat(\n    'AdwEtl.spDoMap',\n    pipeline().parameters.ParPrepMapName\n)",
+						"type": "Expression"
+					},
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.ParEffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ExecDwMap",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ExecPrepMap",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": {
+						"value": "@concat(\n    'AdwEtl.spDoMap',\n    pipeline().parameters.ParDwMapName\n)",
+						"type": "Expression"
+					},
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.ParEffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"ParPrepMapName": {
+				"type": "string"
+			},
+			"ParDwMapName": {
+				"type": "string"
+			},
+			"ParEffectiveStartDate": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwDwFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T18:12:44Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

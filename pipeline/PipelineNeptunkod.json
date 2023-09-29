@@ -1,0 +1,44 @@
+{
+	"name": "PipelineNeptunkod",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "VarValami",
+					"value": "1"
+				}
+			}
+		],
+		"parameters": {
+			"ParValami": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"VarValami": {
+				"type": "String"
+			},
+			"VarCondition": {
+				"type": "Integer",
+				"defaultValue": 100
+			},
+			"VarArray": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "Hallgatok/NEPTUNKOD"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-29T11:35:24Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

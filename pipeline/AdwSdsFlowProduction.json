@@ -1,0 +1,199 @@
+{
+	"name": "AdwSdsFlowProduction",
+	"properties": {
+		"activities": [
+			{
+				"name": "DictProductCategory",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdaDictProductCategory",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DictProductSubcategory",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdaDictProductSubcategory",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Product",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdaProduct",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductCostHistory",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdaProductCostHistory",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ProductListPriceHistory",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdaProductListPriceHistory",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"EffectiveStartDate": {
+				"type": "string",
+				"defaultValue": "1900-01-01"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwSdsFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T17:00:34Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

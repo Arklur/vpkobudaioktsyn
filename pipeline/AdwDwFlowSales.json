@@ -1,0 +1,150 @@
+{
+	"name": "AdwDwFlowSales",
+	"properties": {
+		"activities": [
+			{
+				"name": "DictCurrency",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SubRunPreDw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"ParPrepMapName": "PbDictCurrency",
+						"ParDwMapName": "DwbDictCurrency",
+						"ParEffectiveStartDate": {
+							"value": "@pipeline().parameters.ParEffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "CurrencyRate",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "DictCurrency",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SubRunPreDw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"ParPrepMapName": "PbCurrencyRate",
+						"ParDwMapName": "DwbCurrencyRate",
+						"ParEffectiveStartDate": {
+							"value": "@pipeline().parameters.ParEffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Customer",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SubRunPreDw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"ParPrepMapName": "PbCustomer",
+						"ParDwMapName": "DwbCustomer",
+						"ParEffectiveStartDate": {
+							"value": "@pipeline().parameters.ParEffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "SalesOrderHeader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Customer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "CurrencyRate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SubRunPreDw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"ParPrepMapName": "PbSalesOrderHeader",
+						"ParDwMapName": "DwbSalesOrderHeader",
+						"ParEffectiveStartDate": {
+							"value": "@pipeline().parameters.ParEffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "SalesOrderDetail",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SalesOrderHeader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SubRunPreDw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"ParPrepMapName": "PbSalesOrderDetail",
+						"ParDwMapName": "DwbSalesOrderDetail",
+						"ParEffectiveStartDate": {
+							"value": "@pipeline().parameters.ParEffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"ParEffectiveStartDate": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwDwFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-26T04:28:49Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

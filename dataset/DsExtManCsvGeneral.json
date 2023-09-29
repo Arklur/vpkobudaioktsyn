@@ -1,0 +1,33 @@
+{
+	"name": "DsExtManCsvGeneral",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "synwoktatasgrepton-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ParManFilePath": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().ParManFilePath",
+					"type": "Expression"
+				},
+				"folderPath": "manual",
+				"fileSystem": "external"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,82 @@
+{
+	"name": "ManualStageDwFlow",
+	"properties": {
+		"activities": [
+			{
+				"name": "LoadManualData",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spPiLoadManualData"
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DoMapManual",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "LoadManualData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spPiDoMapManual",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"EffectiveStartDate": {
+				"type": "string",
+				"defaultValue": "1900-01-01"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/Manage"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T16:24:27Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,52 @@
+{
+	"name": "AdwLoad",
+	"properties": {
+		"activities": [
+			{
+				"name": "AdwLoadSales",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwLoadSales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "AdwLoadProduction",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwLoadProduction",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "AdwLoadManual",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwLoadManual",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AdwDataWarehouse/AdwLoad"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T12:39:55Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

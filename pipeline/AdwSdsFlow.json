@@ -1,0 +1,76 @@
+{
+	"name": "AdwSdsFlow",
+	"properties": {
+		"activities": [
+			{
+				"name": "AdwSdsFlowManual",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwSdsFlowManual",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"EffectiveStartDate": {
+							"value": "@pipeline().parameters.EffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "AdwSdsFlowSales",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwSdsFlowSales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"EffectiveStartDate": {
+							"value": "@pipeline().parameters.EffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "AdwSdsFlowProduction",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "AdwSdsFlowProduction",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"EffectiveStartDate": {
+							"value": "@pipeline().parameters.EffectiveStartDate",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"EffectiveStartDate": {
+				"type": "string",
+				"defaultValue": "1900-01-01"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwSdsFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T15:55:53Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

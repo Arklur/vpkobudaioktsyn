@@ -1,0 +1,31 @@
+{
+	"name": "DsOktatasGeneral",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LsSqldbOktatas",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ParSchema": {
+				"type": "string"
+			},
+			"ParTable": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().ParSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().ParTable",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

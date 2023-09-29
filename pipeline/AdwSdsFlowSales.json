@@ -1,0 +1,199 @@
+{
+	"name": "AdwSdsFlowSales",
+	"properties": {
+		"activities": [
+			{
+				"name": "CurrencyRate",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdbCurrencyRate",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Customer",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdbCustomer",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DictCurrency",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdbDictCurrency",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SalesOrderDetail",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdbSalesOrderDetail",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SalesOrderHeader",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "AdwEtl.spDoMapSdbSalesOrderHeader",
+					"storedProcedureParameters": {
+						"EffectiveStartDate": {
+							"value": {
+								"value": "@pipeline().parameters.EffectiveStartDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"LoadId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LsSqldbOktatas",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"EffectiveStartDate": {
+				"type": "string",
+				"defaultValue": "1900-01-01"
+			}
+		},
+		"folder": {
+			"name": "AdwDataWarehouse/AdwSdsFlow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T15:52:08Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
